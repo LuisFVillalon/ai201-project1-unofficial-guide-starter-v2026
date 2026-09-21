@@ -26,6 +26,8 @@ contains the answer.
 <!-- e.g. "One of my questions is about a topic only two documents mention, so
      I expect that one to be hard." -->
 
+We want to make sure we are retrievals are generating accurate answers. 
+
 ---
 
 ## 2. Every answer names a source
@@ -35,6 +37,8 @@ Every answer the system produces names at least one source document.
 **Why this target:**
 <!-- Why all five and not four? What about your setup makes that achievable —
      or what would have to go wrong for it not to be? -->
+
+We want to make sure all generated answers are being cited.
 
 ---
 
@@ -53,9 +57,13 @@ in at least 4 of 5 tries.
 <!-- What did your distances look like when you set the cutoff in Milestone 4?
      Was there a clean gap, or did the two groups overlap? -->
 
+We want to make sure the system is not producing hallucinated outputs.
+
 ---
 
-## 4. Something about your chunks
+## 4. Chunks are complete and say which town they're about
+
+At least 95% of chunks end on ., ! or ?. No chunk is under 100 characters. 100% of chunks from the nine town guides contain the town's name.
 
 <!-- YOU WRITE THIS ONE.
 
@@ -69,15 +77,14 @@ in at least 4 of 5 tries.
        - "No chunk is shorter than 200 characters, since anything below that
           in my corpus turned out to be a heading with no content under it." -->
 
-
-
 **Why this target:**
-
-
+Real content sections in my corpus are at least 176 characters, and the heading-only fragments are 25–29, so 100 sits in the gap. The nine town guides share identical section headings, so a chunk that doesn't name its town can't be told apart from the same section of the other eight.
 
 ---
 
-## 5. Your choice
+## 5. Nonexistent towns get refused, not invented. 
+
+For 3 of 3 questions about a plausible town that isn't in the guides, the system says it has no information and doesn't invent details.
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -87,11 +94,8 @@ in at least 4 of 5 tries.
      present — anything, as long as it names a number or an observable
      outcome. -->
 
-
-
 **Why this target:**
-
-
+The corpus is a set of parallel town guides, each with "Getting there", "Eat and drink" and "Where to stay". A question with a fictitious name might land very close to real chunks. The model must decline this on its own.
 
 ---
 
