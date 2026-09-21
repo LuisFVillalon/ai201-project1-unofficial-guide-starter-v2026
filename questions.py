@@ -23,11 +23,11 @@ names a target of "4 of 5", and four of three is not a thing.
 
 QUESTIONS = [
     # {"question": "...", "expects": "..."},=
-    {"question": "Is there a pub in Elder Ness I can go for a drink on a Monday?", "expects": "No"},
-    {"question": "Is business booming around the coast in November?", "expects": "No"},
-    {"question": "I am stranded in Marchwood, what district should I stay at?", "expects": "Northgate"},
-    {"question": "I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it?", "expects": "Yes"},
-    {"question": "I just bought a bus ticket from operator A, can I use it to ride the bus from operator B?", "expects": "No"},
+    {"question": "Is there a pub in Elder Ness I can go for a drink on a Monday?", "expects": "No, only one pub in Eldress and it closed on Monday."},
+    {"question": "Is business booming around the coast in November?", "expects": "No, business dies down along the coast during November."},
+    {"question": "I am stranded in Marchwood, what district should I stay at?", "expects": "Northgate has the best hotels in the area."},
+    {"question": "I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it?", "expects": "Yes, the trail is smooth and easy."},
+    {"question": "I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay?", "expects": "No, you are not allowed."},
 ]
 
 # Questions from a different world entirely. Your gate should refuse all five.
