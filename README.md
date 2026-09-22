@@ -117,14 +117,7 @@ The other group of questions were out of scope and could never be answered with 
 
 ## How I Used AI
 
-<!-- Two specific moments. For each: what you asked for, what came back, and
-     what you changed about it.
-
-     "I asked Claude to write the chunking function from my notes. It ignored
-     the overlap, so I added that myself" is the level of detail we're after.
-     "I used AI to help me code" is not.
-
-     Milestone 5. -->
+<!-- Milestone 5. -->
 
 **1.**
 The chunking function used in milestone 3 implemented initially paired each header with only its immediately following paragraph. This caused for missed retrievals and context loss for multi-paragraph sections in city_guides. I then told my coding agent to update the logic to group each header with all subsequent paragraphs until the next header is reached.
