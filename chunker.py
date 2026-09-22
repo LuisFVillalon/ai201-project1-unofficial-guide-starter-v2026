@@ -22,10 +22,15 @@ to it, write down what you saw, and move on. That's a real observation about
 your pipeline, not giving up.
 """
 
+import re
 from dataclasses import dataclass
 
 import config
 from ingest import Document
+
+# Matches a Markdown heading line: one or more '#' then a space, e.g.
+# "# Brightwater" or "## Getting there".
+HEADING_RE = re.compile(r"^#{1,6}\s+.*$", re.MULTILINE)
 
 
 @dataclass
@@ -97,7 +102,45 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
       - Would splitting on paragraph breaks keep more thoughts intact than
         splitting on a character count?
     """
-    return fallback_split(documents)
+    chunks: list[Chunk] = []
+    for doc in documents:
+        index = 0
+        for section in _split_by_heading(doc.text):
+            text = section.strip()
+            if text:
+                chunks.append(
+                    Chunk(
+                        text=text,
+                        source=doc.source,
+                        index=index,
+                        produced_by="chunker.py::split_documents",
+                    )
+                )
+                index += 1
+
+    return chunks
+
+
+def _split_by_heading(text: str) -> list[str]:
+    """
+    Break text at Markdown headings, keeping each heading attached to the
+    paragraphs that follow it, up to (but not including) the next heading.
+
+    city_guides documents open with a "# Title" line and use "## Section"
+    for each subsection, so this keeps every section — Getting there, Eat
+    and drink, and so on — together as one chunk.
+    """
+    matches = list(HEADING_RE.finditer(text))
+    if not matches:
+        # No headings at all — fall back to treating the whole doc as one chunk.
+        return [text]
+
+    sections = []
+    for i, match in enumerate(matches):
+        start = match.start()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        sections.append(text[start:end])
+    return sections
 
 
 def describe(chunks: list[Chunk]) -> str:
