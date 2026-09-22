@@ -65,18 +65,6 @@ We want to make sure the system is not producing hallucinated outputs.
 
 At least 95% of chunks end on ., ! or ?. No chunk is under 100 characters. 100% of chunks from the nine town guides contain the town's name.
 
-<!-- YOU WRITE THIS ONE.
-
-     How would you know if your chunks were the right size? Name something
-     countable or observable.
-
-     Examples of the right shape — don't copy these, they should come from
-     what you actually saw in Milestone 3:
-       - "At least 4 of 5 sampled chunks read as a complete thought, with no
-          sentence cut in half at either end."
-       - "No chunk is shorter than 200 characters, since anything below that
-          in my corpus turned out to be a heading with no content under it." -->
-
 **Why this target:**
 Real content sections in my corpus are at least 176 characters, and the heading-only fragments are 25–29, so 100 sits in the gap. The nine town guides share identical section headings, so a chunk that doesn't name its town can't be told apart from the same section of the other eight.
 
@@ -85,14 +73,6 @@ Real content sections in my corpus are at least 176 characters, and the heading-
 ## 5. Nonexistent towns get refused, not invented. 
 
 For 3 of 3 questions about a plausible town that isn't in the guides, the system says it has no information and doesn't invent details.
-
-<!-- YOU WRITE THIS ONE TOO.
-
-     Pick something you actually care about getting right. It could be about
-     speed, about refusals, about a particular kind of question your corpus
-     handles badly, about source attribution being correct rather than merely
-     present — anything, as long as it names a number or an observable
-     outcome. -->
 
 **Why this target:**
 The corpus is a set of parallel town guides, each with "Getting there", "Eat and drink" and "Where to stay". A question with a fictitious name might land very close to real chunks. The model must decline this on its own.

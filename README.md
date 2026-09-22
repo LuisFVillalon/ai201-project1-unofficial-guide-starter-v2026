@@ -21,26 +21,18 @@ Luis Villalon, city_guides
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
-
-     Milestone 5. -->
+<!-- Milestone 5. -->
+     Using city_guides as the corpus, the system can processes questions regarding cities and counties found in the corpus by retrieving the appropriate information. The question can range from geographical to time-senstivity. The top cited sources are provided with the answer. If the answer cannot be answered with the provided documentation in city_guides, the system returns it does not know the answer.
 
 ## Chunking Strategy
 
 **Chunk size:**
+One chunk per ## section, each section averages around 203 characters accross 98 chunks. 
+
 **Overlap:**
+Sections do no share text with their neighbors. Setting a fixed number for the limit would split relevant content once or twice with the cut being in the middle of a sentence. Splitting the chunks by headings kept them whole so retrieval does not have to stitch a fragmented answer back together. 
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
-
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
-
-     Milestone 3. -->
+<!-- Milestone 3. -->
 
 ## Sample Chunks
 
@@ -92,25 +84,18 @@ cards only.
 
 ## Sample Answer
 
-<!-- One complete question and answer, pasted as text, with the source line
-     visible. Milestone 4. -->
+<!-- Milestone 4. -->
 
 **Question:**
+"I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it?"
 **Answer:**
+Yes, Thornby Wells is recommended for walking. It has flat, formal gardens and level streets, making it the region's most accessible town on foot (guide_walking.md).
 
-```
-```
+Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
 
 **My relevance cutoff:**
 
-<!-- The number you set in config.py, and how you got there.
-
-     You ran five questions your corpus covers and the five in OUT_OF_SCOPE
-     that it clearly doesn't, and wrote down the best distance for each. What
-     did those two groups look like? Where was the gap? Put the actual numbers
-     here — the table below wants all ten rows.
-
-     Milestone 4. -->
+<!-- Milestone 4. -->
 
 I chose 5 for my relevance cutoff because I noticed when I asked the questions that were in scope all the related documents never went past 5. 
 
@@ -142,8 +127,10 @@ The other group of questions were out of scope and could never be answered with 
      Milestone 5. -->
 
 **1.**
+The chunking function used in milestone 3 implemented initially paired each header with only its immediately following paragraph. This caused for missed retrievals and context loss for multi-paragraph sections in city_guides. I then told my coding agent to update the logic to group each header with all subsequent paragraphs until the next header is reached.
 
 **2.**
+I asked for an explanation of the output from running python app.py retrieve "question". It brokedown an explantion of the distance metric between the query and retrieved documents. I adjusted the distance threshold value based on that understanding to optimize retrieval quality.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
