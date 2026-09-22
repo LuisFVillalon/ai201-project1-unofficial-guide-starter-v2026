@@ -1,6 +1,6 @@
 # The Unofficial Guide
 
-<!-- Replace this line with your name and which corpus you picked. -->
+Luis Villalon, city_guides
 
 > **This file is your submission.** Fill it in as you go — most sections get
 > written during the milestone that produces them, not at the end.
@@ -44,14 +44,7 @@
 
 ## Sample Chunks
 
-<!-- Five chunks, pasted as text. Label each one and name the file it came from
-     AND the function that produced it — the grader checks your code against
-     what you claim here.
-
-     `python app.py chunks -n 5` prints all three for you. Copy them straight
-     across.
-
-     Milestone 3. -->
+<!-- Milestone 3. -->
 
 ======================================================================
 Chunk 1  |  source: guide_accessibility.md#0  |  produced by: chunker.py::split_documents
@@ -103,7 +96,6 @@ cards only.
      visible. Milestone 4. -->
 
 **Question:**
-
 **Answer:**
 
 ```
@@ -120,9 +112,23 @@ cards only.
 
      Milestone 4. -->
 
+I chose 5 for my relevance cutoff because I noticed when I asked the questions that were in scope all the related documents never went past 5. 
+
+One group was of relevant questions in scope that could be found in city_guides. The distance for these questions averaged around a 0.45. 
+The other group of questions were out of scope and could never be answered with the documents found in city_guides. The distance average for these questions was arounf 0.85.
+
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| Is there a pub in Elder Ness I can go for a drink on a Monday?" | guide_elder_ness.md | 0.3979 |
+| "I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay?" | guide_regional_transport.md | 0.4474 |
+| "I am stranded in Marchwood, what district should I stay at?" | guide_marchwood.md | 0.4529  |
+| "I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it?" |  guide_accessibility.md | 0.4773 |
+| "Is business booming around the coast in November?" | guide_seasons.md | 0.4954 |
+| "What is the capital of Mongolia?" | guide_seasons.md | 0.7542 |
+| "How do I write a for loop in Rust?" | guide_corry_vale.md | 0.8130 |
+| "What is the recommended dosage of ibuprofen for a headache?" | guide_walking.md | 0.8459 |
+| How do I change the oil in a diesel engine?" | guide_brightwater.md | 0.8917 |
+| "Who won the 1994 World Cup?" | guide_regional_transport.md | 0.8990 |
 
 ## How I Used AI
 
