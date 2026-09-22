@@ -32,6 +32,8 @@ One chunk per ## section, each section averages around 203 characters accross 98
 **Overlap:**
 Sections do no share text with their neighbors. Setting a fixed number for the limit would split relevant content once or twice with the cut being in the middle of a sentence. Splitting the chunks by headings kept them whole so retrieval does not have to stitch a fragmented answer back together. 
 
+All my documents contain headelines and paragraphs that are about the topic in that headline. Each document regards a specific topic or county.
+
 <!-- Milestone 3. -->
 
 ## Sample Chunks
