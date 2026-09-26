@@ -43,6 +43,7 @@ All my documents contain headelines and paragraphs that are about the topic in t
 ======================================================================
 Chunk 1  |  source: guide_accessibility.md#0  |  produced by: chunker.py::split_documents
 ======================================================================
+
 # Getting around the region with limited mobility
 
 An honest assessment rather than a promotional one. Some of these places are
@@ -154,15 +155,165 @@ I asked for an explanation of the output from running python app.py retrieve "qu
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Chunks are complete and say which town they're about | ≥95% end in punct; no chunk <100 chars; 100% name town | 95.9% / 4 short / 15.3% | 95.9% / 4 short / 15.3% | 95.9% / 4 short / 15.3% | MISSED |
+| 5. Nonexistent towns get refused, not invented | 3 of 3 | 3/3 | 3/3 | 3/3 | MET |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+     
+## Real output
+
+This is what the system actually produced. Paste the relevant parts
+into your README underneath the table — the rubric asks for real
+output as text, not a description of it.
+
+### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 1
+
+- Best distance: 0.3979 (passed the gate)
+- Sources retrieved: guide_corry_vale.md, guide_eating.md, guide_elder_ness.md, guide_kestrelford.md
+
+```
+No, you cannot. Elder Ness has only one pub, and it is closed on Mondays (guide_elder_ness.md and guide_eating.md).
+```
+
+### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 2
+
+- Best distance: 0.3979 (passed the gate)
+- Sources retrieved: guide_corry_vale.md, guide_eating.md, guide_elder_ness.md, guide_kestrelford.md
+
+```
+No, you cannot. Elder Ness has one pub, and it is closed on Mondays. 
+
+Source: `guide_elder_ness.md` (also mentioned in `guide_eating.md`)
+```
+
+### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 3
+
+- Best distance: 0.3979 (passed the gate)
+- Sources retrieved: guide_corry_vale.md, guide_eating.md, guide_elder_ness.md, guide_kestrelford.md
+
+```
+No, you cannot. Elder Ness has one pub, but it is closed on Mondays (guide_elder_ness.md and guide_eating.md).
+```
+
+### Is business booming around the coast in November? — run 1
+
+- Best distance: 0.4954 (passed the gate)
+- Sources retrieved: guide_halden_bay.md, guide_kestrelford.md, guide_pellew_sands.md, guide_seasons.md
+
+```
+No, business is not booming around the coast in November. By November, coastal businesses begin closing and the days are short (`guide_seasons.md`). Additionally, much of Halden Bay closes entirely from November to February (`guide_halden_bay.md`).
+```
+
+### Is business booming around the coast in November? — run 2
+
+- Best distance: 0.4954 (passed the gate)
+- Sources retrieved: guide_halden_bay.md, guide_kestrelford.md, guide_pellew_sands.md, guide_seasons.md
+
+```
+No. By November, coastal businesses begin closing in Halden Bay, and much of it closes entirely from November to February, while in the autumn guide it notes that coastal businesses begin closing by November (`guide_halden_bay.md` and `guide_seasons.md`).
+```
+
+### Is business booming around the coast in November? — run 3
+
+- Best distance: 0.4954 (passed the gate)
+- Sources retrieved: guide_halden_bay.md, guide_kestrelford.md, guide_pellew_sands.md, guide_seasons.md
+
+```
+No, business is not booming around the coast in November. According to `guide_seasons.md`, coastal businesses begin closing by November, and days are short. Additionally, `guide_halden_bay.md` states that much of the food and drink businesses close entirely from November to February.
+```
+
+### I am stranded in Marchwood, what district should I stay at? — run 1
+
+- Best distance: 0.4529 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_marchwood.md
+
+```
+You should stay in the Northgate district (from guide_marchwood.md).
+```
+
+### I am stranded in Marchwood, what district should I stay at? — run 2
+
+- Best distance: 0.4529 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_marchwood.md
+
+```
+You should stay in the Northgate district. 
+
+Source: guide_marchwood.md
+```
+
+### I am stranded in Marchwood, what district should I stay at? — run 3
+
+- Best distance: 0.4529 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_marchwood.md
+
+```
+You should stay in the Northgate district. 
+
+Source: guide_marchwood.md
+```
+
+### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 1
+
+- Best distance: 0.4773 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
+
+```
+Yes, Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (*guide_walking.md*). Additionally, the town is flat, compact, and everything is within three minutes of everything else (*guide_accessibility.md*).
+```
+
+### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 2
+
+- Best distance: 0.4773 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
+
+```
+Yes, Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (*guide_walking.md*). Additionally, the town is flat, compact, and its pump room and gardens are level throughout (*guide_accessibility.md*).
+```
+
+### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 3
+
+- Best distance: 0.4773 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
+
+```
+Yes, Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (*guide_walking.md*). Additionally, the pump room and gardens are level throughout, and everything in the town is within three minutes of everything else (*guide_accessibility.md*).
+```
+
+### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 1
+
+- Best distance: 0.4474 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_eating.md, guide_regional_transport.md, guide_seasons.md
+
+```
+No, you cannot. Three operators run in the region and they do not accept each other's tickets. 
+*(Source: guide_regional_transport.md)*
+```
+
+### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 2
+
+- Best distance: 0.4474 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_eating.md, guide_regional_transport.md, guide_seasons.md
+
+```
+No, you cannot. Three operators run in the region and they do not accept each other's tickets (*guide_regional_transport.md*).
+```
+
+### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 3
+
+- Best distance: 0.4474 (passed the gate)
+- Sources retrieved: guide_accessibility.md, guide_eating.md, guide_regional_transport.md, guide_seasons.md
+
+```
+No, you cannot. Three operators run in the region and they do not accept each other's tickets (*guide_regional_transport.md*).
+```
+
+
 
 ## Verdicts
 
