@@ -128,6 +128,9 @@ The chunking function used in milestone 3 implemented initially paired each head
 **2.**
 I asked for an explanation of the output from running python app.py retrieve "question". It brokedown an explantion of the distance metric between the query and retrieved documents. I adjusted the distance threshold value based on that understanding to optimize retrieval quality.
 
+**3. (Unit 2)**
+I used Claude Code throughout unit 2 to work through the milestones one step at a time, checking each step against the assignment. For the improvement, Claude wrote the change to `chunker.py::_split_by_heading` from that plan: the `# Title` is no longer a split point and is added to the start of every section chunk. Claude suggested wording for several README sections and fixed the grammar in "Did it help?", "What's Still Broken" and "What I'd Do Differently", and I checked each against my own results.
+
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
      claims earns nothing.
@@ -411,9 +414,17 @@ Partly. The modification in my chunking strategy fixed criterion 4 but broke cri
 
      Milestone 5. -->
 
+Criterion 2 is MISSED (4/5). The Thornby Wells walking question now sits at 0.5046, just over the 0.5 cutoff, so it gets refused with no answer or source.
+
+**What I'd do about it:** Raise the cutoff slightly, for example to 0.51. This is the simplest fix, but Ashcombe Ferry is at 0.520, so the margin that protects criterion 5 would shrink to about 0.01.
+
+**Why I stopped here:** The assignment allows only one change this unit, and changing the cutoff as well would have made it impossible to tell which change caused what.
+
 ## What I'd Do Differently
 
 <!-- Knowing what you know now — which of your five criteria would you write
      differently, and why?
 
      Milestone 5. -->
+
+I would write criterion 5 differently. The original version let the relevance gate do all the refusing: in the before run, all three fake-town questions were stopped by the gate with 0 model calls, so the model was never tested on whether it invents towns. That is why I had to revise it in this unit. Next time, I would write it from the start to require at least one fake-town question that gets past the gate, so the model has to decline on its own. In the after run this only happened by chance, when Wrenmoor's distance dropped from 0.549 to 0.478 after the chunking change.
