@@ -356,6 +356,13 @@ above was aggregated from.
 
      Milestone 3. -->
 
+     Criterion 4 — MISSED. Stage: chunking. Both failed parts come from one cause: chunker.py::_split_by_heading cuts at every heading level, including the document's # Title.
+     
+          - 4 chunks under 100 characters. In the four region-wide guides (eating, regional_transport, seasons, walking), the # Title line is followed immediately by a ## section, so the title becomes a chunk on its own with no body, 23–27 characters long.
+     
+          - Only 15.3% of town-guide chunks name their town. The town's name appears only in the # Title, which stays in chunk #0. Every later section starts with a generic heading like ## Eat and drink or ## Getting there, and all nine town guides share those headings. Once one of those chunks leaves its file, nothing in its text says which town it describes. 
+     
+
 ## The Improvement
 
 **What I changed:**
