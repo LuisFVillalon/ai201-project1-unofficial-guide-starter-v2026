@@ -161,37 +161,21 @@ I asked for an explanation of the output from running python app.py retrieve "qu
 | 4. Chunks are complete and say which town they're about | ≥95% end in punct; no chunk <100 chars; 100% name town | 95.9% / 4 short / 15.3% | 95.9% / 4 short / 15.3% | 95.9% / 4 short / 15.3% | MISSED |
 | 5. Nonexistent towns get refused, not invented | 3 of 3 | 3/3 | 3/3 | 3/3 | MET |
 
-<!-- Underneath, paste the REAL output for each criterion from one of your
-     runs — the actual text your system produced, not a description of it.
-     Name the file and function that produced it. -->
-     
-## Real output
+### Real output
 
-This is what the system actually produced. Paste the relevant parts
-into your README underneath the table — the rubric asks for real
-output as text, not a description of it.
+All output below is from `results/run_2026-09-27_2238_before.md`.
 
-### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 1
+- Produced by: `run_eval.py::main`
+- Retrieval: `store.py::search`, chunks from `chunker.py::split_documents`
+- Corpus: `city_guides` (index variant `default`)
+- top-k: 5 · relevance cutoff: 0.5
+- Runs per question: 3, caching off
+- When: 2026-09-27 22:38
 
-- Best distance: 0.3979 (passed the gate)
-- Sources retrieved: guide_corry_vale.md, guide_eating.md, guide_elder_ness.md, guide_kestrelford.md
+**Criteria 1 and 2** — the five answers from run 1. Each one contains the
+expected answer and names at least one source file.
 
-```
-No, you cannot. Elder Ness has only one pub, and it is closed on Mondays (guide_elder_ness.md and guide_eating.md).
-```
-
-### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 2
-
-- Best distance: 0.3979 (passed the gate)
-- Sources retrieved: guide_corry_vale.md, guide_eating.md, guide_elder_ness.md, guide_kestrelford.md
-
-```
-No, you cannot. Elder Ness has one pub, and it is closed on Mondays. 
-
-Source: `guide_elder_ness.md` (also mentioned in `guide_eating.md`)
-```
-
-### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 3
+#### Is there a pub in Elder Ness I can go for a drink on a Monday? — run 1
 
 - Best distance: 0.3979 (passed the gate)
 - Sources retrieved: guide_corry_vale.md, guide_eating.md, guide_elder_ness.md, guide_kestrelford.md
@@ -200,25 +184,7 @@ Source: `guide_elder_ness.md` (also mentioned in `guide_eating.md`)
 No, you cannot. Elder Ness has one pub, but it is closed on Mondays (guide_elder_ness.md and guide_eating.md).
 ```
 
-### Is business booming around the coast in November? — run 1
-
-- Best distance: 0.4954 (passed the gate)
-- Sources retrieved: guide_halden_bay.md, guide_kestrelford.md, guide_pellew_sands.md, guide_seasons.md
-
-```
-No, business is not booming around the coast in November. By November, coastal businesses begin closing and the days are short (`guide_seasons.md`). Additionally, much of Halden Bay closes entirely from November to February (`guide_halden_bay.md`).
-```
-
-### Is business booming around the coast in November? — run 2
-
-- Best distance: 0.4954 (passed the gate)
-- Sources retrieved: guide_halden_bay.md, guide_kestrelford.md, guide_pellew_sands.md, guide_seasons.md
-
-```
-No. By November, coastal businesses begin closing in Halden Bay, and much of it closes entirely from November to February, while in the autumn guide it notes that coastal businesses begin closing by November (`guide_halden_bay.md` and `guide_seasons.md`).
-```
-
-### Is business booming around the coast in November? — run 3
+#### Is business booming around the coast in November? — run 1
 
 - Best distance: 0.4954 (passed the gate)
 - Sources retrieved: guide_halden_bay.md, guide_kestrelford.md, guide_pellew_sands.md, guide_seasons.md
@@ -227,75 +193,25 @@ No. By November, coastal businesses begin closing in Halden Bay, and much of it 
 No, business is not booming around the coast in November. According to `guide_seasons.md`, coastal businesses begin closing by November, and days are short. Additionally, `guide_halden_bay.md` states that much of the food and drink businesses close entirely from November to February.
 ```
 
-### I am stranded in Marchwood, what district should I stay at? — run 1
+#### I am stranded in Marchwood, what district should I stay at? — run 1
 
 - Best distance: 0.4529 (passed the gate)
 - Sources retrieved: guide_accessibility.md, guide_marchwood.md
 
 ```
-You should stay in the Northgate district (from guide_marchwood.md).
+You should stay in the Northgate district (`guide_marchwood.md`).
 ```
 
-### I am stranded in Marchwood, what district should I stay at? — run 2
-
-- Best distance: 0.4529 (passed the gate)
-- Sources retrieved: guide_accessibility.md, guide_marchwood.md
-
-```
-You should stay in the Northgate district. 
-
-Source: guide_marchwood.md
-```
-
-### I am stranded in Marchwood, what district should I stay at? — run 3
-
-- Best distance: 0.4529 (passed the gate)
-- Sources retrieved: guide_accessibility.md, guide_marchwood.md
-
-```
-You should stay in the Northgate district. 
-
-Source: guide_marchwood.md
-```
-
-### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 1
+#### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 1
 
 - Best distance: 0.4773 (passed the gate)
 - Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
 
 ```
-Yes, Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (*guide_walking.md*). Additionally, the town is flat, compact, and everything is within three minutes of everything else (*guide_accessibility.md*).
+Yes, I recommend it. Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (guide_walking.md). It is also described as flat, compact, and with level pump rooms and gardens (guide_accessibility.md).
 ```
 
-### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 2
-
-- Best distance: 0.4773 (passed the gate)
-- Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
-
-```
-Yes, Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (*guide_walking.md*). Additionally, the town is flat, compact, and its pump room and gardens are level throughout (*guide_accessibility.md*).
-```
-
-### I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? — run 3
-
-- Best distance: 0.4773 (passed the gate)
-- Sources retrieved: guide_accessibility.md, guide_regional_transport.md, guide_thornby_wells.md, guide_walking.md
-
-```
-Yes, Thornby Wells has flat, formal gardens and level streets, making it the region's most accessible town on foot (*guide_walking.md*). Additionally, the pump room and gardens are level throughout, and everything in the town is within three minutes of everything else (*guide_accessibility.md*).
-```
-
-### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 1
-
-- Best distance: 0.4474 (passed the gate)
-- Sources retrieved: guide_accessibility.md, guide_eating.md, guide_regional_transport.md, guide_seasons.md
-
-```
-No, you cannot. Three operators run in the region and they do not accept each other's tickets. 
-*(Source: guide_regional_transport.md)*
-```
-
-### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 2
+#### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 1
 
 - Best distance: 0.4474 (passed the gate)
 - Sources retrieved: guide_accessibility.md, guide_eating.md, guide_regional_transport.md, guide_seasons.md
@@ -304,16 +220,102 @@ No, you cannot. Three operators run in the region and they do not accept each ot
 No, you cannot. Three operators run in the region and they do not accept each other's tickets (*guide_regional_transport.md*).
 ```
 
-### I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? — run 3
+**Criterion 3** — produced by `run_eval.py::check_out_of_scope`, cutoff 0.5.
+Refused 5 of 5. Retrieval is deterministic and the gate is a comparison
+against a fixed number, so this is one pass, not three.
 
-- Best distance: 0.4474 (passed the gate)
-- Sources retrieved: guide_accessibility.md, guide_eating.md, guide_regional_transport.md, guide_seasons.md
+| Out-of-scope question | Best distance | Gate |
+|---|---|---|
+| What is the capital of Mongolia? | 0.754 | refused |
+| How do I change the oil in a diesel engine? | 0.892 | refused |
+| Who won the 1994 World Cup? | 0.899 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.846 | refused |
+| How do I write a for loop in Rust? | 0.813 | refused |
+
+**Criterion 4** — produced by `check_chunks.py::report`, measuring the chunks
+that `chunker.py::split_documents` produces. No model calls and no retrieval,
+so the number is the same every run.
 
 ```
-No, you cannot. Three operators run in the region and they do not accept each other's tickets (*guide_regional_transport.md*).
+$ python check_chunks.py
+98 chunks, produced by chunker.py::split_documents
+
+1. Chunks ending on . ! or ?
+   94/98 = 95.9%   target >= 95%
+   MET
+
+2. Chunks under 100 characters
+   4   target 0
+   MISSED
+     guide_eating.md#0  (26 chars)  '# Eating across the region'
+     guide_regional_transport.md#0  (27 chars)  '# Getting around the region'
+     guide_seasons.md#0  (26 chars)  '# When to visit the region'
+     guide_walking.md#0  (23 chars)  '# Walking in the region'
+
+3. Town-guide chunks naming their town
+   11/72 = 15.3%   target 100%
+   MISSED
+   61 chunks do not name their town, for example:
+     guide_brightwater.md#1  '## Getting there'
+     guide_brightwater.md#2  '## Getting around'
+     guide_brightwater.md#3  '## Eat and drink'
+     guide_brightwater.md#4  '## What to see'
+     guide_brightwater.md#5  '## Where to stay'
 ```
 
+Two of the three parts missed, so the criterion as a whole is MISSED. The four
+short chunks are all the same thing: a document's `# Title` line with no body
+under it, because `_split_by_heading` cuts at every heading level and the title
+of a region-wide guide is followed immediately by a `##` section. The town-name
+result is the bigger miss — 15.3% against a target of 100% — and the cause is
+visible in the examples: the nine town guides use identical section headings,
+so a chunk reading "## Eat and drink" is indistinguishable from the same
+section of the other eight guides once it leaves its file.
 
+**Criterion 5** — produced by `app.py::cmd_ask`, run by hand against three
+plausible town names that are not in the corpus. Refused 3 of 3, no invented
+details.
+
+| Fake-town question | Best distance | Result |
+|---|---|---|
+| Where should I stay in Ashcombe Ferry? | 0.519 | "I don't have enough information about that." |
+| Is there a pub in Netherby Cross? | 0.566 | "I don't have enough information about that." |
+| How do I get to Wrenmoor by bus? | 0.549 | "I don't have enough information about that." |
+
+```
+$ python app.py ask "Where should I stay in Ashcombe Ferry?"
+  (best distance 0.519, cutoff 0.5)
+
+I don't have enough information about that.
+
+0 model calls this session
+```
+
+All three were stopped by the relevance gate, not by the model declining — the
+run reports `0 model calls`, so no fake-town question ever reached it. My
+stated reason for this criterion assumed the model would have to refuse on its
+own, and that isn't what happened. The margin is also thin: 0.519, 0.549 and
+0.566 against a cutoff of 0.5. A fake town whose name sits closer to the real
+guides would pass the gate and reach the model untested, so 3/3 here says the
+gate is holding, not that the model refuses to invent towns.
+
+**Per-question pass/fail**, produced by `run_eval.py::main` scoring each
+answer with `scorer.py::judge`. This is the summary the criterion table
+above was aggregated from.
+
+| Question | Run 1 | Run 2 | Run 3 |
+|---|---|---|---|
+| Is there a pub in Elder Ness I can go for a drink on a Monday? | pass | pass | pass |
+| Is business booming around the coast in November? | pass | pass | pass |
+| I am stranded in Marchwood, what district should I stay at? | pass | pass | pass |
+| I am 55 years old and would love to go on a walk in Thornby Wells, do you recommend it? | pass | pass | pass |
+| I just bought a bus ticket from operator Kestrelford, can I use it to ride the bus from operator Halden Bay? | pass | pass | pass |
+
+> **Note on `expects`:** my original `expects` values in `questions.py` were
+> full sentences, which `scorer.py`'s substring match can never satisfy, so the
+> first run scored 0/5. I shortened each to the key phrase — "Northgate",
+> "closed", "do not accept" — without changing what I considered a correct
+> answer.
 
 ## Verdicts
 
