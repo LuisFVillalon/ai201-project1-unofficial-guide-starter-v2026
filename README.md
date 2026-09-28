@@ -367,10 +367,11 @@ above was aggregated from.
 
 **What I changed:**
 
+In chunker.py::_split_by_heading, the # Title is no longer a split point, and it is added to the start of every section chunk from that file. 
+
 **Why I picked it:**
 
-<!-- Connect it to a specific diagnosis above in one sentence. If you can't,
-     you picked a fix because it sounded impressive. -->
+My criterion 4 diagnosis traced both failures (title-only chunks under 100 characters, and chunks that don't name their town) to one cause: _split_by_heading splits at every heading level, including the # Title. This change goes after that cause directly.
 
 ### Run Log — After
 
@@ -379,11 +380,11 @@ above was aggregated from.
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 4/5 | 4/5 | 4/5 | MISSED |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Chunks are complete and say which town they're about | ≥95% end in punct; no chunk <100 chars; 100% name town | 100% / 0 short / 100% | 100% / 0 short / 100% | 100% / 0 short / 100% | MET |
+| 5. Nonexistent towns get refused, not invented | 3 of 3 |	3/3 | 3/3 | 3/3 | MET |
 
 **Did it help?**
 
@@ -393,6 +394,12 @@ above was aggregated from.
      tell.
 
      Milestone 4. -->
+
+Partly. The modification in my chunking strategy fixed criterion 4 but broke criterion 2.
+
+- **Fixed:** Criterion 4 went from MISSED to MET. Before, 4 chunks were under 100 characters and only 15.3% of town-guide chunks named their town. Now 0 chunks are under 100 characters (shortest is 174) and 100% of town-guide chunks (72/72) name their town.
+- **Broke:** Criterion 2 went from MET to MISSED. The Thornby Wells walking question's best distance went from 0.4773 to 0.5046, just over the 0.5 relevance cutoff, so the gate refused it in all 3 runs and it got no answer or source.
+- **Side effect:** One of the three fake-town questions, "How do I get to Wrenmoor by bus?", now passes the gate (0.549 → 0.478). In all 3 runs the model declined on its own, saying the documents don't mention Wrenmoor, and invented nothing. The other two fake towns were still refused by the gate.
 
 ## What's Still Broken
 

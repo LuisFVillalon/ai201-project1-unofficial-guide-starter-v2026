@@ -28,9 +28,13 @@ from dataclasses import dataclass
 import config
 from ingest import Document
 
-# Matches a Markdown heading line: one or more '#' then a space, e.g.
-# "# Brightwater" or "## Getting there".
-HEADING_RE = re.compile(r"^#{1,6}\s+.*$", re.MULTILINE)
+# Matches the document's title line: exactly one '#' then a space, e.g.
+# "# Brightwater". "## Getting there" does not match.
+TITLE_RE = re.compile(r"^#\s+.*$", re.MULTILINE)
+
+# Matches a section heading: exactly two '#' then a space, e.g.
+# "## Getting there".
+SECTION_RE = re.compile(r"^##\s+.*$", re.MULTILINE)
 
 
 @dataclass
@@ -123,23 +127,41 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
 
 def _split_by_heading(text: str) -> list[str]:
     """
-    Break text at Markdown headings, keeping each heading attached to the
-    paragraphs that follow it, up to (but not including) the next heading.
+    Break text at "## Section" headings, keeping each heading attached to the
+    paragraphs that follow it, up to (but not including) the next one.
 
     city_guides documents open with a "# Title" line and use "## Section"
-    for each subsection, so this keeps every section — Getting there, Eat
-    and drink, and so on — together as one chunk.
+    for each subsection. The title is not a split point: it is taken out and
+    put at the start of every section, so a chunk like "## Eat and drink"
+    still says which town it describes once it leaves its file. Any intro
+    text between the title and the first "##" becomes its own section; when
+    there is none, no title-only chunk is made.
     """
-    matches = list(HEADING_RE.finditer(text))
-    if not matches:
-        # No headings at all — fall back to treating the whole doc as one chunk.
+    title_match = TITLE_RE.search(text)
+    if title_match:
+        title = title_match.group(0).strip()
+        body = text[: title_match.start()] + text[title_match.end() :]
+    else:
+        title = ""
+        body = text
+
+    matches = list(SECTION_RE.finditer(body))
+    if matches:
+        # Intro text before the first "##", then one section per "##".
+        pieces = [body[: matches[0].start()]]
+        for i, match in enumerate(matches):
+            end = matches[i + 1].start() if i + 1 < len(matches) else len(body)
+            pieces.append(body[match.start() : end])
+    else:
+        pieces = [body]
+
+    sections = [piece.strip() for piece in pieces if piece.strip()]
+    if not sections:
+        # Nothing but a title, or an empty doc — keep it whole as one chunk.
         return [text]
 
-    sections = []
-    for i, match in enumerate(matches):
-        start = match.start()
-        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-        sections.append(text[start:end])
+    if title:
+        sections = [f"{title}\n\n{section}" for section in sections]
     return sections
 
 
