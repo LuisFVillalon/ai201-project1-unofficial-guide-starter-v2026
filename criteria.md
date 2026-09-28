@@ -77,6 +77,10 @@ For 3 of 3 questions about a plausible town that isn't in the guides, the system
 **Why this target:**
 The corpus is a set of parallel town guides, each with "Getting there", "Eat and drink" and "Where to stay". A question with a fictitious name might land very close to real chunks. The model must decline this on its own.
 
+**Revised in unit 2:** For 3 of 3 fake-town questions, the system says it has no information and invents nothing — and at least one of those questions must get past the relevance gate so the model has to decline on its own.
+**Why revised:** All three original questions were stopped by the relevance gate (0 model calls), so the criterion measured the gate, not whether the model invents towns.
+
+
 ---
 
 <!-- ─────────────────────────────────────────────────────────────────────────

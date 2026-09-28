@@ -330,11 +330,11 @@ above was aggregated from.
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer (4 of 5) | MET | 5/5 in all three run. In each run the file that holds the answer was among the retrieved sources, and the expected phrase in the answer were found. |
+| 2 | Every answer names a source (5 of 5) | MET | I checked all 15 logged answers (5 questions × 3 runs), not just run 1. Each one names at least one corpus file. |
+| 3 | Gate stops out-of-corpus questions (4 of 5) | MET | 5/5 refused. The nearest out-of-scope question is 0.25 above the 0.5 cutoff, and the in-scope questions all sit below it (0.398–0.495). The gate is a fixed comparison on deterministic distances, so one pass shows the same result all three runs would. |
+| 4 | Chunks are complete and name their town (≥95% punct; 0 under 100 chars; 100% name town) | MISSED | All three parts must hold, and two failed. Punctuation passed narrowly (95.9% against 95%). There were 4 chunks under 100 characters against a target of 0. Only 15.3% of town-guide chunks name their town, against a target of 100%. The numbers are nowhere near the target. |
+| 5 | Nonexistent towns get refused (3 of 3) | MET | By the wording of the target it's met: all three questions got "I don't have enough information about that" and no invented details. But the relevance gate did the refusing, not the model. I'm calling it MET on what the target says, and flagging that it held for a different reason than the one I expected. |
 
 ## Diagnoses
 
